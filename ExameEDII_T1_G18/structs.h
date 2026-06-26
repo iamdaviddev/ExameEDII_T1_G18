@@ -50,14 +50,14 @@ typedef struct {
 typedef struct {
     Usuario* usuarios;
     int total_usuarios;
+    int capacidade_maxima;
 } RedeComputadores;
-
 
 // Funções para criar e gerenciar a rede e as conexões entre usuários.
 RedeComputadores* criar_rede(int capacidade);
 void cadastrar_usuario(RedeComputadores* rede, int id, char* nome, int limite_caixa);
 void conectar_amigos(RedeComputadores* rede, int id1, int id2);
-int sao_amigos_diretos(RedeComputadores* rede, int id1, int id2);
+int sao_vizinhos_diretos(RedeComputadores* rede, int id1, int id2);
 
 // Funções para trabalhar com as caixas de correio e suas filas.
 void iniciar_caixa(CaixaCorreio* caixa, int limite);
@@ -66,7 +66,7 @@ int enfileirar_mensagem(CaixaCorreio* caixa, Mensagem msg);
 Mensagem desenfileirar_mensagem(CaixaCorreio* caixa);
 
 // Função para verificar se uma mensagem deve ser marcada como spam.
-int verificar_se_e_spam(char* texto_mensagem, PalavraSpam* dicionario, int total_p, int k);
+int verificar_se_eh_spam(char* texto_mensagem, PalavraSpam* dicionario, int total_p, int k);
 
 // Funções para envio e visualização de mensagens entre usuários.
 void enviar_email(RedeComputadores* rede, int id_remetente, int id_destinatario, char* texto, PalavraSpam* dicionario, int total_p, int k);
@@ -74,11 +74,3 @@ void exibir_caixas_usuario(RedeComputadores* rede, int id_usuario);
 
 // Função para liberar a memória alocada pela rede.
 void destruir_rede(RedeComputadores* rede);
-
-// Funções para as próximas fases
-int caixa_esta_cheia(CaixaCorreio* caixa);
-int enfileirar_mensagem(CaixaCorreio* caixa, Mensagem msg);
-Mensagem desenfileirar_mensagem(CaixaCorreio* caixa);
-int verificar_se_eh_spam(char* texto, PalavraSpam* dic, int tp, int k);
-void enviar_email(RedeComputadores* r, int rem, int dest, char* t, PalavraSpam* d, int tp, int k);
-void exibir_caixas_usuario(RedeComputadores* r, int id);

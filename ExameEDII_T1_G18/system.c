@@ -42,8 +42,8 @@ void cadastrar_usuario(RedeComputadores* rede, int id, char* nome, int limite_ca
     rede->usuarios[posicao].lista_amigos = NULL;
     
     // Inicializa as caixas de correio do utilizador
-    inicializar_caixa(&rede->usuarios[posicao].caixa_normal, limite_caixa);
-    inicializar_caixa(&rede->usuarios[posicao].caixa_spam, limite_caixa);
+    iniciar_caixa(&rede->usuarios[posicao].caixa_normal, limite_caixa);
+    iniciar_caixa(&rede->usuarios[posicao].caixa_spam, limite_caixa);
     
     rede->total_usuarios++;
 }
@@ -82,7 +82,7 @@ void conectar_amigos(RedeComputadores* rede, int id1, int id2) {
 }
 
 // Função que verifica se existe uma ligação direta entre dois usuários
-int sao_amigos_diretos(RedeComputadores* rede, int id1, int id2) {
+int sao_vizinhos_diretos(RedeComputadores* rede, int id1, int id2) {
     int pos1 = encontrar_posicao_por_id(rede, id1);
     if (pos1 == -1) return 0;
     
